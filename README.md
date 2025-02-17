@@ -261,3 +261,77 @@ export ANTHROPIC_API_KEY='your-api-key-here'
 MIT License - feel free to use this code in your own projects.
 
 If you find value from my work: give a shout out and tag my YT channel [IndyDevDan](https://www.youtube.com/@indydevdan).
+
+### Virtual Environment Setup and Basic Commands
+
+#### Setting up a Virtual Environment
+
+1. Create a new virtual environment:
+```bash
+# Windows
+python -m venv .venv
+
+# macOS/Linux
+python3 -m venv .venv
+```
+
+2. Activate the virtual environment:
+```bash
+# Windows (PowerShell)
+.\.venv\Scripts\Activate.ps1
+
+# Windows (Command Prompt)
+.\.venv\Scripts\activate.bat
+
+# macOS/Linux
+source .venv/bin/activate
+```
+
+3. Deactivate the virtual environment when you're done:
+```bash
+deactivate
+```
+
+#### Basic Terminal Commands
+
+Here are some essential terminal commands you'll use frequently:
+
+```bash
+# Directory Navigation
+cd <directory>          # Change directory
+cd ..                   # Go up one directory
+pwd                     # Print working directory (current location)
+dir                     # List directory contents (Windows)
+ls                      # List directory contents (macOS/Linux)
+
+# Virtual Environment
+pip list                # List installed packages
+pip install <package>   # Install a package
+pip uninstall <package> # Remove a package
+pip freeze > requirements.txt  # Save current packages to requirements.txt
+pip install -r requirements.txt  # Install packages from requirements.txt
+
+# Git Commands
+git status             # Check repository status
+git add .              # Stage all changes
+git commit -m "message" # Commit changes
+git pull               # Pull latest changes
+git push               # Push your changes
+
+# File Operations
+mkdir <directory>      # Create a new directory
+type <file>           # Display file contents (Windows)
+cat <file>            # Display file contents (macOS/Linux)
+copy <src> <dst>      # Copy file (Windows)
+cp <src> <dst>        # Copy file (macOS/Linux)
+del <file>            # Delete file (Windows)
+rm <file>             # Delete file (macOS/Linux)
+```
+
+#### Best Practices for Virtual Environments
+
+1. **One Project, One Environment**: Create a separate virtual environment for each project to avoid package conflicts.
+2. **Requirements File**: Always maintain an up-to-date `requirements.txt` file.
+3. **Git Integration**: Add `.venv/` to your `.gitignore` file to avoid committing the virtual environment.
+4. **Activation Check**: Always verify that your virtual environment is activated before installing packages or running your project.
+5. **Clean Dependencies**: Regularly review and clean unused dependencies to keep your environment lean.
