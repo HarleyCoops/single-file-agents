@@ -41,3 +41,9 @@ wheels/
 .installed.cfg
 *.egg
 MANIFEST
+
+# Environment variables and secrets
+envtext.txt
+.env
+*.env
+.env.*
