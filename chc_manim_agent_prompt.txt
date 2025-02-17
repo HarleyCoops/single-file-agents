@@ -1,0 +1,77 @@
+Visualize charged particles moving under the influence of a custom vector field (e.g., a fluid flow or electromagnetic field) while avoiding obstacles. The scene combines vector calculus, particle dynamics, and collision detection.
+
+Components to Render:
+Vector Field:
+
+Define a 2D vector field using equations like:
+F(x, y) = [sin(y) + 0.5cos(2x), cos(x) + 0.5sin(2y)]
+
+Visualize the field with arrows or color gradients (e.g., hue for direction, brightness for magnitude).
+
+Particles:
+
+Simulate 50–100 particles with:
+
+Charge (+/-) determining attraction/repulsion to obstacles.
+
+Velocity influenced by the vector field at their position.
+
+Trails to show motion history (fading over time).
+
+Obstacles:
+
+Add 3–5 static circular obstacles with:
+
+Electric charge (repel particles of the same charge).
+
+Collision detection (particles bounce off or change direction).
+
+Dynamic Color Mapping:
+
+Particles change color based on speed (e.g., red = fast, blue = slow).
+
+Obstacles pulse in brightness based on nearby particle density.
+
+Physics/Math Involved:
+Vector Field Integration:
+Particles update velocity via F(x, y) at their current position.
+Use Euler integration:
+
+python
+Copy
+particle.x += velocity.x * dt  
+particle.y += velocity.y * dt  
+velocity.x += F(x, y).x * dt  
+velocity.y += F(x, y).y * dt  
+Coulomb’s Law for Obstacles:
+Compute repulsion force between particles and obstacles:
+
+Copy
+force = k * (charge_particle * charge_obstacle) / (distance²)  
+Collision Response:
+Reflect particle velocity on obstacle collision (simulate elasticity).
+
+Visualization Tips:
+Use OpenGL/WebGL or a library like Processing for smooth rendering.
+
+For trails, store particle positions in a deque and draw with fading opacity.
+
+Render the vector field as a grid of arrows or a quiver plot in the background.
+
+Pseudocode Outline:
+python
+Copy
+def setup():  
+    initialize particles, obstacles, and vector field  
+
+def draw():  
+    clear_screen()  
+    draw_vector_field()  
+    for each particle:  
+        compute_force_from_vector_field()  
+        compute_repulsion_from_obstacles()  
+        update_velocity()  
+        handle_collisions()  
+        update_position()  
+        draw_trail()  
+    draw_obstacles()  

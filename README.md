@@ -335,3 +335,74 @@ rm <file>             # Delete file (macOS/Linux)
 3. **Git Integration**: Add `.venv/` to your `.gitignore` file to avoid committing the virtual environment.
 4. **Activation Check**: Always verify that your virtual environment is activated before installing packages or running your project.
 5. **Clean Dependencies**: Regularly review and clean unused dependencies to keep your environment lean.
+
+# Manim Agent
+
+This is a single-file agent that uses OpenAI's GPT-4 to generate and run Manim animations from natural language descriptions.
+
+## Setup
+
+1. Install `uv` if you haven't already:
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+2. Create a `.env` file in the project root with your OpenAI API key:
+```
+OPENAI_API_KEY=your_openai_api_key_here
+MANIM_QUALITY=medium  # Can be low, medium, or high
+MANIM_BACKGROUND_COLOR=BLACK
+```
+
+3. Make sure you have Manim's system dependencies installed (Cairo, FFmpeg, etc.). See [Manim installation guide](https://docs.manim.community/en/stable/installation.html) for details.
+
+## Usage
+
+Run the agent with:
+
+```bash
+uv run chc_manim_agent_gemini_v1.py -p "Create an animation that shows a square transforming into a circle" -s MyScene
+```
+
+Arguments:
+- `-p, --prompt`: Description of the animation you want to create
+- `-s, --scene`: Name of the Manim scene class (should match what's in the generated code)
+- `-c, --compute`: Maximum number of agent loops (default: 5)
+
+## Features
+
+- Uses GPT-4 to generate Manim code from natural language descriptions
+- Handles environment variables for configuration
+- Supports different quality levels (low, medium, high)
+- Includes error handling and cleanup
+- Provides detailed logging with rich text formatting
+
+## Environment Variables
+
+- `OPENAI_API_KEY`: Your OpenAI API key (required)
+- `MANIM_QUALITY`: Animation quality (low, medium, high)
+- `MANIM_BACKGROUND_COLOR`: Background color for animations
+
+## Example
+
+```bash
+# Generate a simple animation
+uv run chc_manim_agent_gemini_v1.py -p "Create an animation where a red circle grows and then fades out" -s CircleAnimation
+
+# Generate a more complex animation
+uv run chc_manim_agent_gemini_v1.py -p "Create an animation showing the Pythagorean theorem with squares on each side of a right triangle" -s PythagoreanTheorem
+```
+
+## Troubleshooting
+
+1. If you get OpenAI API errors, check your API key in the `.env` file
+2. If Manim fails to run, ensure all system dependencies are installed
+3. For quality issues, try adjusting the `MANIM_QUALITY` in your `.env` file
+4. If the animation isn't what you expected, try being more specific in your prompt
+
+## Notes
+
+- The agent uses a temporary file to run the Manim code
+- Files are automatically cleaned up after execution
+- The agent will retry on errors up to the specified compute limit
+- Generated animations are saved in the `media` directory
